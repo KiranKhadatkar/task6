@@ -1,4 +1,5 @@
-if file cd TASKS/task6/* | grep .php
+cd /root/TASKS/task6/ 
+if ls *| grep .php
 then
 if kubectl get deployment | grep phpserver
 then
@@ -12,7 +13,7 @@ POD=$(kubectl get pods -l app=phpserver -o jsonpath="{.items[0].metadata.name}")
 kubectl cp *.php $POD:/var/www/html
 
 
-if file cd TASKS/task6/* | grep .html
+if ls * | grep .html
 then
 if kubectl get deployment | grep webserver
 then
