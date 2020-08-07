@@ -25,7 +25,7 @@ spec:
          volumes:
             - name: php-volume
               persistentVolumeClaim:
-                  claimName: php-pvc
+                  claimName: php-volume
 
 ---
 
