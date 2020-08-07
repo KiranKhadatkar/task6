@@ -5,4 +5,4 @@ else
 mkdir -p /root/TASKS/task6
 fi
 
-cp -rvf * /host/TASKS/task6
+cp -rvf * /root/TASKS/task6
