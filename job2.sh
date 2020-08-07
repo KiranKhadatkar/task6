@@ -18,6 +18,8 @@ then
 if kubectl get deployment | grep webserver
 then
 echo "web server is already running"
+POD=$(kubectl get pods -l app=webserver -o jsonpath="{.items[0].metadata.name}")
+kubectl cp *.html $POD:/usr/local/apache2/htdocs/
 else
 kubectl apply -f webserver.yml
 fi
@@ -25,7 +27,6 @@ else
 echo "No html file for deployment"
 fi
 
-POD=$(kubectl get pods -l app=webserver -o jsonpath="{.items[0].metadata.name}")
-kubectl cp *.html $POD:/usr/local/apache2/htdocs/
+
 
  
