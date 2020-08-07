@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+   name: webserver-deploy
+spec:
+   replicas: 1
+   selector:
+       matchLabels:
+           app: webserver
+   template:
+       metadata: 
+           labels:
+              app: webserver
+
+       spec:
+           containers:
+             - name: webserver
+               image: httpd
+               ports:
+                 - containerPort: 8000
+                   name: webserver
+               volumeMounts:
+                 - name: webserver-storage
+                   mountPath: /usr/local/apache2/htdocs/
+           volumes:
+             - name: webserver-storage
+               persistenceVolumeClaim:
+                     claimName: webserver-pvc                       
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: webserver-pvc
+spec:
+   accessModes:
+       - ReadWriteOnce
+   resources:
+      requests:
+         storage: 2Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver-service
+  labels:
+    app: webserver
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: webserver
+  type: NodePort
