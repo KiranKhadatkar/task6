@@ -21,6 +21,8 @@ echo "web server is already running"
 else
 kubectl apply -f webserver.yml
 fi
+else
+echo "No html file for deployment"
 fi
 
 POD=$(kubectl get pods -l app=webserver -o jsonpath="{.items[0].metadata.name}")
