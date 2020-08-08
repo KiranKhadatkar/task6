@@ -1,3 +1,5 @@
 <?php
 
-echo "This is a php file" ?>
+echo "This is a php file";
+
+?>
