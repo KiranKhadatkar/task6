@@ -1,4 +1,4 @@
-IP="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' http-webserver):81/index.php"
+IP="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' task6os):81/index.php"
 
 echo $IP
 
