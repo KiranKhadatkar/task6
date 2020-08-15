@@ -1,13 +1,8 @@
-IP="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' task6os):81/index.php"
-
-echo $IP
-
-if curl -s -o /dev/null -w '%{http_code}\n' $IP | grep 200
-
+export status=$(curl -siw "%{http_code}" -o /dev/null http://192.168.99.101:31766)
+if [$status == 200]
 then
-        echo Website is Responding Properly
-        exit 0
+echo "done"
+exit 1
 else
-        echo Website is not Responding Properly
-        exit 1
+exit 0
 fi
